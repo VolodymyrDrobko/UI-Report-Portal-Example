@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="example" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="core.TestListener"/>
+    </listeners>
+    <test name="GitHubTest">
+        <classes>
+            <class name="GitHubSearchTest">
+                <methods>
+                    <include name="gitHubGeneralLogin"/>
+                    <include name="gitHubGeneralLogin2"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
