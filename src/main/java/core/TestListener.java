@@ -52,6 +52,5 @@ public class TestListener implements ITestListener {
     @Override
     public void onFinish(ITestContext iTestContext) {
         reportLogger.flushReport();
-        BaseTest.driver.quit();
     }
 }

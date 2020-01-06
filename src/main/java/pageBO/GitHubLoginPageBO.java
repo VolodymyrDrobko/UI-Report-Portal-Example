@@ -3,6 +3,11 @@ package pageBO;
 import com.aventstack.extentreports.Status;
 import page.GitHubLoginPage;
 
+import java.util.Optional;
+
+import static utils.Constants.DEFAULT_LOGIN;
+import static utils.Constants.DEFAULT_PASSWORD;
+
 public class GitHubLoginPageBO extends BasePageBO {
     private GitHubLoginPage gitHubLoginPage;
 
@@ -12,7 +17,7 @@ public class GitHubLoginPageBO extends BasePageBO {
 
     public GitHubLoginPageBO loginToGit(String login, String password) {
         reportLogger.log(Status.INFO, "Login to Git Hub");
-        gitHubLoginPage.loginToGit(login, password);
+        gitHubLoginPage.loginToGit(Optional.ofNullable(login).orElse(DEFAULT_LOGIN), Optional.ofNullable(password).orElse(DEFAULT_PASSWORD));
         softAssert.assertTrue(true, "Assertion message");
         reportLogger.log(Status.INFO, "Finish login to Git Hub");
         return this;
@@ -20,7 +25,7 @@ public class GitHubLoginPageBO extends BasePageBO {
 
     public GitHubLoginPageBO loginToGitWithFail(String login, String password) {
         reportLogger.log(Status.INFO, "Login to Git Hub");
-        gitHubLoginPage.loginToGit(login, password);
+        gitHubLoginPage.loginToGit(Optional.ofNullable(login).orElse(DEFAULT_LOGIN), Optional.ofNullable(password).orElse(DEFAULT_PASSWORD));
         softAssert.assertTrue(false, "Assertion message");
         reportLogger.log(Status.INFO, "Finish login to Git Hub");
         return this;

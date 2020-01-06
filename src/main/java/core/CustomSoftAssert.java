@@ -38,7 +38,7 @@ public class CustomSoftAssert extends Assertion {
 
     public void assertAll() {
         if (!errorsMap.isEmpty()) {
-            TestListener.reportLogger.log(Status.FAIL, "Test Ended with status");
+            TestListener.reportLogger.log(Status.FAIL, "Test Ended");
             StringBuilder sb = new StringBuilder("The following asserts failed:");
             for (Map.Entry<AssertionError, IAssert<?>> assertionErrorBody : errorsMap.entrySet()) {
                 AssertionError errorBody = assertionErrorBody.getKey();
