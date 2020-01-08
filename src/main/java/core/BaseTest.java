@@ -11,10 +11,7 @@ import static utils.Constants.DEFAULT_URL;
 
 public class BaseTest {
     public static WebDriver driver;
-    public ThreadLocal<String> browserThread = new ThreadLocal<String>();
     public static String browserName = "";
-
-
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethodSetUp() {
@@ -32,8 +29,7 @@ public class BaseTest {
     }
 
     private void startBrowser() {
-        browserThread.set(Configuration.BROWSER);
-        browserName = Optional.ofNullable(browserThread.get()).orElse(DEFAULT_BROWSER);
+        browserName = TestListener.browserName;
         driver = DriverManager.getDriver(browserName);
     }
 }
