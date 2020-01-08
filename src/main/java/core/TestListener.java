@@ -22,7 +22,7 @@ public class TestListener implements ITestListener {
         browserThread.set(Configuration.BROWSER);
         browserName = Optional.ofNullable(browserThread.get()).orElse(DEFAULT_BROWSER);
         testName = iTestContext.getCurrentXmlTest().getName();
-        reportsThread.set(new ExtentHtmlReport().setUpExtentHtmlReport(testName, BaseTest.browserName));
+        reportsThread.set(new ExtentHtmlReport().setUpExtentHtmlReport(testName, browserName));
         reportLogger = reportsThread.get();
     }
 
