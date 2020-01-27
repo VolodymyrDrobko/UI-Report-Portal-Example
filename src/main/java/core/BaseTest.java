@@ -6,12 +6,11 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.Optional;
 
-import static utils.Constants.DEFAULT_BROWSER;
 import static utils.Constants.DEFAULT_URL;
 
 public class BaseTest {
     public static WebDriver driver;
-    public static String browserName = "";
+    public static String browserName;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethodSetUp() {
