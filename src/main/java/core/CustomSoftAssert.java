@@ -32,13 +32,14 @@ public class CustomSoftAssert extends Assertion {
     }
 
     private void onAssertionFail(IAssert assertionBody, AssertionError assertionError) {
-        TestListener.reportLogger.log(Status.FAIL, assertResultMessage + " >>> FAIL");
+        TestListener.reportLogger.log(Status.FAIL, assertResultMessage + " >>>>> FAIL");
         errorsMap.put(assertionError, assertionBody);
     }
 
     public void assertAll() {
         if (!errorsMap.isEmpty()) {
-            TestListener.reportLogger.log(Status.FAIL, "Test Ended");
+            TestListener.reportLogger.log(Status.FAIL,"Test Ended");
+            System.out.println("Test Ended");
             StringBuilder sb = new StringBuilder("The following asserts failed:");
             for (Map.Entry<AssertionError, IAssert<?>> assertionErrorBody : errorsMap.entrySet()) {
                 AssertionError errorBody = assertionErrorBody.getKey();

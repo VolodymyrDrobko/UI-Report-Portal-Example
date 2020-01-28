@@ -1,13 +1,13 @@
 package pageBO;
 
 import core.CustomSoftAssert;
-import core.ExtentHtmlReport;
+import core.ExtentHtmlReportManager;
 import core.TestListener;
 import page.BasePage;
 
 public class BasePageBO {
     private BasePage basePage;
-    protected ExtentHtmlReport reportLogger;
+    protected ExtentHtmlReportManager reportLogger;
     protected static CustomSoftAssert softAssert;
 
     public BasePageBO() {

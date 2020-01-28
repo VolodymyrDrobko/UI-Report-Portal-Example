@@ -26,6 +26,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <!--<goal></goal>-->
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/${suiteXml}</suiteXmlFile>
@@ -95,12 +103,6 @@
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>3.0.6</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M4</version>
         </dependency>
     </dependencies>
 </project>

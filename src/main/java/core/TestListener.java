@@ -7,48 +7,43 @@ import org.testng.ITestResult;
 
 import java.util.Optional;
 
-import static utils.Constants.DEFAULT_BROWSER;
-
 public class TestListener implements ITestListener {
-    private String testName = "";
-    public static String testCaseName = "";
-    private ThreadLocal<ExtentHtmlReport> reportsThread = new ThreadLocal<>();
-    public static ExtentHtmlReport reportLogger;
-    public ThreadLocal<String> browserThread = new ThreadLocal<String>();
-    public static String browserName = "";
+    public static ExtentHtmlReportManager reportLogger;
+    static String browserName;
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        browserThread.set(Configuration.BROWSER);
-        browserName = Optional.ofNullable(browserThread.get()).orElse(DEFAULT_BROWSER);
-        testName = iTestContext.getCurrentXmlTest().getName();
-        reportsThread.set(new ExtentHtmlReport().setUpExtentHtmlReport(testName, browserName));
-        reportLogger = reportsThread.get();
+        browserName = Optional.ofNullable(Configuration.BROWSER).orElse(iTestContext.getCurrentXmlTest().getParameter("browserName"));
+        String testName = iTestContext.getCurrentXmlTest().getName();
+
+        reportLogger = new ExtentHtmlReportManager().setUpExtentHtmlReport(testName, browserName);
     }
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        testCaseName = iTestResult.getName();
+        String testCaseName = iTestResult.getMethod().getMethodName();
         reportLogger.startTest(testCaseName);
-        System.out.println("***** Test started ***** " + testCaseName);
+        System.out.println("Test case is started - " + testCaseName);
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        reportLogger.log(Status.PASS, testCaseName + " - PASSED");
+        reportLogger.log(Status.PASS, iTestResult.getMethod().getMethodName());
+        System.out.println(iTestResult.getMethod().getMethodName() + " - PASSED");
         reportLogger.flushReport();
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        reportLogger.log(Status.FAIL, testCaseName + " - FAILED");
+        reportLogger.log(Status.FAIL, iTestResult.getMethod().getMethodName());
+        System.out.println(iTestResult.getMethod().getMethodName() + " >>>>> FAILED");
         reportLogger.flushReport();
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        reportLogger.log(Status.SKIP, testCaseName + " - SKIPPED");
-        System.out.println(testCaseName + " - SKIPPED");
+        reportLogger.log(Status.SKIP, iTestResult.getMethod().getMethodName());
+        System.out.println(iTestResult.getMethod().getMethodName() + " >>>>> SKIPPED");
         reportLogger.flushReport();
     }
 
