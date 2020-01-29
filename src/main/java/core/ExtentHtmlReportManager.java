@@ -16,12 +16,14 @@ public class ExtentHtmlReportManager {
 
     private ExtentReports report;
     private ExtentHtmlReporter htmlReporter;
-    private ExtentTest reportLogger;
+
+    public static ThreadLocal<ExtentTest> reportPool = new ThreadLocal<>();
 
     public ExtentHtmlReportManager setUpExtentHtmlReport(String testName, String browserName) {
             reportName = "Report-" + testName + "-" + browserName + ".html";
             reportPathName = System.getProperty("user.dir") + File.separator + "Reports" + File.separator + reportName;
             htmlReporter = new ExtentHtmlReporter(reportPathName);
+
             report = new ExtentReports();
             report.attachReporter(htmlReporter);
         return this;
@@ -36,19 +38,28 @@ public class ExtentHtmlReportManager {
             String screenShotFileWithPath = screenShotPath + screenShotName;
             ScreenShotManager.takeScreenshot(DriverManager.getDriver(), screenShotFileWithPath);
             try {
-                reportLogger.fail(message, MediaEntityBuilder.createScreenCaptureFromPath("Screenshots" + File.separator + message + date + ".png").build());
+                getReport().fail(message, MediaEntityBuilder.createScreenCaptureFromPath("Screenshots" + File.separator + message + date + ".png").build());
             } catch (IOException e) {
-                reportLogger.fail(message);
+                getReport().fail(message);
             }
         } else {
-            reportLogger.log(logStatus, message);
+            getReport().log(logStatus, message);
         }
     }
 
-    public void startTest(String testCaseName) {
+    public void createExtentHtmlReport(String testCaseName) {
         testCaseCounter++;
-        reportLogger = report.createTest(testCaseCounter + ". " + testCaseName);
+        ExtentTest reportLogger = report.createTest(testCaseCounter + ". " + testCaseName);
+        setReport(reportLogger);
         log(Status.INFO,"Test started - " + testCaseName);
+    }
+
+    public static void setReport(ExtentTest reportLogger) {
+        reportPool.set(reportLogger);
+    }
+
+    public static ExtentTest getReport() {
+        return reportPool.get();
     }
 
     public void flushReport() {report.flush();}

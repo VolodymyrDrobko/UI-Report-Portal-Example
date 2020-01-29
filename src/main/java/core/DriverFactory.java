@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
     static WebDriver createDriverInstance(String browserName) {
-        WebDriver driver = null;
+        WebDriver driver;
         if ("Chrome".equalsIgnoreCase(browserName)) {
             driver = chromeDriverConfiguration();
         }

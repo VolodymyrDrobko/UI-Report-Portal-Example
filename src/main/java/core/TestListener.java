@@ -22,7 +22,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         String testCaseName = iTestResult.getMethod().getMethodName();
-        reportLogger.startTest(testCaseName);
+        reportLogger.createExtentHtmlReport(testCaseName);
         System.out.println("Test case is started - " + testCaseName);
     }
 
