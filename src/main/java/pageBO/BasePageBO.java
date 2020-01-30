@@ -1,18 +1,18 @@
 package pageBO;
 
+import com.aventstack.extentreports.ExtentTest;
 import core.CustomSoftAssert;
-import core.ExtentHtmlReportManager;
-import core.TestListener;
+import core.ReportManager;
 import page.BasePage;
 
 public class BasePageBO {
     private BasePage basePage;
-    protected ExtentHtmlReportManager reportLogger;
+    protected ExtentTest reportLogger;
     protected static CustomSoftAssert softAssert;
 
     public BasePageBO() {
         basePage = new BasePage();
-        reportLogger = TestListener.reportLogger;
+        reportLogger = ReportManager.getReportLogger();
         softAssert = new CustomSoftAssert();
     }
 

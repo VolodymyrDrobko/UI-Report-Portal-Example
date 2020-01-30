@@ -28,18 +28,16 @@ public class CustomSoftAssert extends Assertion {
     }
 
     private void onAssertionSuccess() {
-        TestListener.reportLogger.log(Status.PASS, assertResultMessage + " - PASSED SUCCESSFULLY");
+        ReportManager.log(Status.PASS, assertResultMessage);
     }
 
     private void onAssertionFail(IAssert assertionBody, AssertionError assertionError) {
-        TestListener.reportLogger.log(Status.FAIL, assertResultMessage + " >>>>> FAIL");
+        ReportManager.log(Status.FAIL, assertResultMessage);
         errorsMap.put(assertionError, assertionBody);
     }
 
     public void assertAll() {
         if (!errorsMap.isEmpty()) {
-            TestListener.reportLogger.log(Status.FAIL,"Test Ended");
-            System.out.println("Test Ended");
             StringBuilder sb = new StringBuilder("The following asserts failed:");
             for (Map.Entry<AssertionError, IAssert<?>> assertionErrorBody : errorsMap.entrySet()) {
                 AssertionError errorBody = assertionErrorBody.getKey();

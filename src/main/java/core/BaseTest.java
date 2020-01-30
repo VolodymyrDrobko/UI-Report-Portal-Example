@@ -14,7 +14,8 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethodSetUp(ITestContext iTestContext) {
-        WebDriver driver = DriverFactory.createDriverInstance(TestListener.browserName);
+        WebDriver driver = DriverFactory
+                .createDriverInstance(Optional.ofNullable(Configuration.BROWSER).orElse(iTestContext.getCurrentXmlTest().getParameter("browserName")));
         DriverManager.setDriver(driver);
         driver.get(Optional.ofNullable(Configuration.URL).orElse(DEFAULT_URL));
         driver.manage().window().maximize();
