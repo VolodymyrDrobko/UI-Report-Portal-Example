@@ -1,6 +1,5 @@
 package core;
 
-import com.aventstack.extentreports.Status;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.IAssert;
 import org.testng.collections.Maps;
@@ -28,11 +27,10 @@ public class CustomSoftAssert extends Assertion {
     }
 
     private void onAssertionSuccess() {
-        ReportManager.log(Status.PASS, assertResultMessage);
+
     }
 
     private void onAssertionFail(IAssert assertionBody, AssertionError assertionError) {
-        ReportManager.log(Status.FAIL, assertResultMessage);
         errorsMap.put(assertionError, assertionBody);
     }
 
