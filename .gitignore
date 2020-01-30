@@ -1,0 +1,11 @@
+target
+Reports
+.idea
+src/main/resources/exe
+*.iml
+test_data/*
+bin/*
+test-output/*
+.classpath
+.settings/org.eclipse.jdt.core.prefs
+.project
