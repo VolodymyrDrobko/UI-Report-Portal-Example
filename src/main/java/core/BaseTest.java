@@ -1,9 +1,11 @@
 package core;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pageBO.BasePageBO;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +22,7 @@ public class BaseTest {
         driver.get(Optional.ofNullable(Configuration.getURL()).orElse(DEFAULT_URL));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        LoggerManager.setLogger(LogManager.getLogger(BasePageBO.class));
     }
 
     @AfterMethod(alwaysRun = true)

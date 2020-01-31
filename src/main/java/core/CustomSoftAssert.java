@@ -1,5 +1,6 @@
 package core;
 
+import org.apache.logging.log4j.Level;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.IAssert;
 import org.testng.collections.Maps;
@@ -27,11 +28,12 @@ public class CustomSoftAssert extends Assertion {
     }
 
     private void onAssertionSuccess() {
-
+        LoggerManager.getLogger().log(Level.INFO, assertResultMessage + " - PASSED SUCCESSFUL");
     }
 
     private void onAssertionFail(IAssert assertionBody, AssertionError assertionError) {
         errorsMap.put(assertionError, assertionBody);
+        LoggerManager.getLogger().log(Level.ERROR, assertResultMessage + " >>>>> FAILED");
     }
 
     public void assertAll() {
