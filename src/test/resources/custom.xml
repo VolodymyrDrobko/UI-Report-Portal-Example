@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="example" configfailurepolicy="continue"
-    parallel="methods" thread-count="4" verbose="1">
+       parallel="methods" thread-count="4" verbose="1">
     <parameter name="browserName" value="Chrome"/>
+
     <listeners>
-        <listener class-name="core.TestListener"/>
+        <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
     </listeners>
+
     <test name="GitHubTest">
         <classes>
-            <class name="GitHubSearchTest"/>
+            <class name="GitHubSearchTest">
+                <methods>
+                    <include name="gitHubGeneralLogin"/>
+                    <include name="gitHubGeneralLogin2"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

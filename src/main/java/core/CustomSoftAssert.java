@@ -33,7 +33,10 @@ public class CustomSoftAssert extends Assertion {
 
     private void onAssertionFail(IAssert assertionBody, AssertionError assertionError) {
         errorsMap.put(assertionError, assertionBody);
-        LoggerManager.getLogger().log(Level.ERROR, assertResultMessage + " >>>>> FAILED");
+        String screenshotHome = ScreenShotManager.getScreenshotPathWithName(assertResultMessage);
+        ScreenShotManager.takeScreenshot(DriverManager.getDriver(), screenshotHome);
+        LoggerManager.getLogger().log(Level.ERROR,
+                ScreenShotManager.attachScreenShotToReport(assertResultMessage, screenshotHome));
     }
 
     public void assertAll() {
