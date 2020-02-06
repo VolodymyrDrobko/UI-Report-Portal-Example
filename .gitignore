@@ -9,4 +9,4 @@ test-output/*
 .classpath
 .settings/org.eclipse.jdt.core.prefs
 .project
-*.properties
+configuration.properties
